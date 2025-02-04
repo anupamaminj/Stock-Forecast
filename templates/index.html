@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Market Analysis</title>
+</head>
+<body>
+    <h2>Upload Stock Dataset (CSV)</h2>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <button type="submit">Upload & Analyze</button>
+    </form>
+
+    {% if plot_ema %}
+        <h3>Stock Trend with EMA</h3>
+        <img src="{{ plot_ema }}" alt="EMA Chart">
+    {% endif %}
+
+    {% if plot_prediction %}
+        <h3>Actual vs Predicted Stock Prices</h3>
+        <img src="{{ plot_prediction }}" alt="Prediction Chart">
+    {% endif %}
+
+    {% if dataset_link %}
+        <h3>Download Processed Dataset</h3>
+        <a href="{{ url_for('download_file', filename=dataset_link.split('/')[-1]) }}">Download CSV</a>
+    {% endif %}
+</body>
+</html>
